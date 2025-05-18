@@ -59,9 +59,9 @@ namespace Event_Management_System
             string username = textBox7.Text;
             string password = textBox4.Text;
             string confirmPassword = textBox5.Text;
-            string companyName = textBox2.Text;
-            string contactNumber = textBox3.Text;
-            string email = textBox1.Text;
+            string companyName = textBox1.Text;
+            string contactNumber = textBox2.Text;
+            string email = textBox3.Text;
             string Role = "Vendor";
             string BusinessType = comboBox1.SelectedItem.ToString();
             string servicesOffered = string.Join(", ", checkedListBox1.CheckedItems.OfType<string>().ToArray());
