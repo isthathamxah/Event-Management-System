@@ -1,0 +1,33 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35825.156
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Event Management System", "Event Management System\Event Management System.csproj", "{98D3DCB7-9718-43D1-ADF0-F8D4C134E1BA}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{8EC462FD-D22E-90A8-E5CE-7E832BA40C5D}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Resources", "Resources", "{02EA681E-C7D8-13C7-8484-4AC65E1B71E8}"
+	ProjectSection(SolutionItems) = preProject
+		E:\final.png = E:\final.png
+		E:\logo1_removebg_preview2.png = E:\logo1_removebg_preview2.png
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{98D3DCB7-9718-43D1-ADF0-F8D4C134E1BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{98D3DCB7-9718-43D1-ADF0-F8D4C134E1BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{98D3DCB7-9718-43D1-ADF0-F8D4C134E1BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{98D3DCB7-9718-43D1-ADF0-F8D4C134E1BA}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {617A08A6-F06A-4EA5-9DD4-FA6C77C56782}
+	EndGlobalSection
+EndGlobal
