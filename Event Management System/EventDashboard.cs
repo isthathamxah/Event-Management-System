@@ -1,59 +1,15 @@
-﻿/*using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-
-namespace EMS
-{
-    public partial class EventDashboard : Form
-    {
-        public EventDashboard()
-        {
-            InitializeComponent();
-        }
-
-        private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-            //go to attendee dashboard
-            this.Close();
-            Attendee_Dashboard attendee = new Attendee_Dashboard();
-            attendee.Show();
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-        }
-
-        private void button4_Click_1(object sender, EventArgs e)
-        {
-
-            //go to booking page
-            this.Close();
-            Booking booking = new Booking();
-            booking.Show();
-        }
-    }
-}
-*/
-
-
-
-using System;
+﻿using System;
 using System.Data;
 using System.Data.SqlClient;
 using System.Windows.Forms;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
-using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+// Ensure these using directives are correctly referenced in your project.
+// You might need to add references to System.Windows.Forms.VisualStyles for these to resolve,
+// but they are often not strictly necessary for basic functionality and can sometimes be removed.
+// using static System.Windows.Forms.VisualStyles.VisualStyleElement.Button;
+// using static System.Windows.Forms.VisualStyles.VisualStyleElement;
+// Ensure Event_Management_System is a valid namespace in your solution if it's used elsewhere.
+// If it's just for the Attendee_Dashboard class, then 'using Event_Management_System;' might be enough if Event_Management_System
+// is the namespace where Attendee_Dashboard is defined.
 using Event_Management_System;
 
 namespace Event
@@ -61,6 +17,7 @@ namespace Event
     public partial class EventDashboard : Form
     {
         // Connection string for SQL Server (update with your actual connection details)
+        // IMPORTANT: Replace "DESKTOP-Q3RNHLM" with your actual SQL Server instance name or IP.
         string connectionString = "Data Source=DESKTOP-Q3RNHLM;Initial Catalog=Project;Integrated Security=True;TrustServerCertificate=True";
 
         public EventDashboard()
@@ -75,7 +32,6 @@ namespace Event
             this.Close();
             Attendee_Dashboard attendee_Dashboard = new Attendee_Dashboard();
             attendee_Dashboard.Show();
-            // Or navigate to another form
         }
 
         // Button click event for "Exit"
@@ -92,11 +48,21 @@ namespace Event
             string keyword = textBox1.Text;
             DateTime startDate = dateTimePicker1.Value;
             DateTime endDate = dateTimePicker2.Value;
-            string location = comboBox1.SelectedItem?.ToString();
+
+            // FIX: Ensure location is not null. If no item is selected, use an empty string.
+            string location = comboBox1.SelectedItem?.ToString() ?? string.Empty;
+
             decimal minPrice = numericUpDown1.Value;
             decimal maxPrice = numericUpDown2.Value;
             bool isTicketAvailable = checkBox1.Checked;
-            string category = textBox1.Text;
+
+            // IMPORTANT: Review where 'category' should come from.
+            // If textBox1 is for 'keyword', and 'category' is a separate field,
+            // you should have a dedicated UI control for 'category' (e.g., another TextBox or ComboBox).
+            // For now, it's set to an empty string to avoid reusing textBox1.Text and potential confusion.
+            // Replace with the correct UI control's value if applicable (e.g., 'textBoxCategory.Text').
+            string category = string.Empty;
+
             string organizer = textBox2.Text;
 
             // Save event data to the database
@@ -133,6 +99,8 @@ namespace Event
 
                     // Notify the user
                     MessageBox.Show($"{rowsAffected} row(s) inserted successfully.");
+                    // After saving, refresh the DataGridView to show the new data
+                    BindEventData();
                 }
                 catch (Exception ex)
                 {
@@ -146,15 +114,26 @@ namespace Event
         {
             // Clear all form fields
             textBox1.Clear();
-            checkedListBox1.ClearSelected();
-            comboBox1.SelectedIndex = -1;
+            // checkedListBox1.ClearSelected(); // This might not be the correct way to clear a CheckedListBox.
+            // Consider clearing items or unchecking all items if that's the intent.
+            if (checkedListBox1.Items.Count > 0) // Example of how to uncheck all items
+            {
+                for (int i = 0; i < checkedListBox1.Items.Count; i++)
+                {
+                    checkedListBox1.SetItemChecked(i, false);
+                }
+            }
+
+            comboBox1.SelectedIndex = -1; // Deselects any item in the ComboBox
             numericUpDown1.Value = numericUpDown1.Minimum;
             numericUpDown2.Value = numericUpDown2.Minimum;
             checkBox1.Checked = false;
             dateTimePicker1.Value = DateTime.Now;
             dateTimePicker2.Value = DateTime.Now;
-            textBox1.Clear();
+            // textBox1.Clear(); // This is redundant as it's already cleared above
             textBox2.Clear();
+            // After clearing, you might want to refresh the DataGridView if it's tied to filters
+            // but this method is for clearing input fields, not necessarily resetting displayed data.
         }
 
         // DataGridView DataBinding (example for displaying event data)
@@ -178,7 +157,7 @@ namespace Event
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show($"Error: {ex.Message}");
+                    MessageBox.Show($"Error loading event data: {ex.Message}");
                 }
             }
         }
@@ -187,13 +166,13 @@ namespace Event
         private void EventDashboard_Load(object sender, EventArgs e)
         {
             // Example: Initialize comboBox1 with data (could be from a database or predefined list)
-            comboBox1.Items.AddRange(new string[] { "Location1", "Location2", "Location3" });
+            comboBox1.Items.AddRange(new string[] { "New York", "London", "Paris", "Online" });
 
             // Example: Set default values for numericUpDown controls
-            numericUpDown1.Value = 10; // Set default minimum price
-            numericUpDown2.Value = 100; // Set default maximum price
+            numericUpDown1.Value = 0; // Set default minimum price to 0
+            numericUpDown2.Value = 500; // Set a reasonable default maximum price
 
-            // You can also call other methods here like BindEventData to load initial data into DataGridView
+            // Load initial data into DataGridView when the form loads
             BindEventData();
         }
 
@@ -207,18 +186,15 @@ namespace Event
         // Additional event handlers, e.g., for button4_Click_1, can go here if needed
         private void button4_Click_1(object sender, EventArgs e)
         {
-
             //go to booking page
             this.Close();
-            Booking booking = new Booking();
+            Booking booking = new Booking(); // Ensure 'Booking' class is defined and accessible
             booking.Show();
         }
 
         private void splitContainer1_Panel1_Paint(object sender, PaintEventArgs e)
         {
-            // Custom drawing logic
+            // Custom drawing logic (if any) for splitContainer1_Panel1
         }
-
-
     }
 }
