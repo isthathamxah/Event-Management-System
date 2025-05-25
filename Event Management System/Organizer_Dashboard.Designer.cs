@@ -1,4 +1,6 @@
-﻿namespace Event_Management_System
+﻿using System;
+
+namespace Event_Management_System
 {
     partial class Organizer_Dashboard
     {
@@ -87,6 +89,7 @@
             this.label2.TabIndex = 18;
             this.label2.Text = "Welcome to Organizer Dashboard";
             this.label2.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
+            this.label2.Click += new System.EventHandler(this.label2_Click);
             // 
             // button1
             // 
@@ -278,5 +281,7 @@
         private System.Windows.Forms.PictureBox pictureBox4;
         private System.Windows.Forms.PictureBox pictureBox5;
         private System.Windows.Forms.PictureBox pictureBox7;
+
+        
     }
 }

@@ -196,5 +196,10 @@ namespace Event
         {
             // Custom drawing logic (if any) for splitContainer1_Panel1
         }
+
+        private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
     }
 }

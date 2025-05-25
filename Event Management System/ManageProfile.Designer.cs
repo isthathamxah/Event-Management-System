@@ -101,6 +101,7 @@
             this.dataGridView1.RowTemplate.Height = 28;
             this.dataGridView1.Size = new System.Drawing.Size(285, 261);
             this.dataGridView1.TabIndex = 18;
+            this.dataGridView1.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dataGridView1_CellContentClick);
             // 
             // label1
             // 
@@ -109,10 +110,11 @@
             this.label1.ForeColor = System.Drawing.Color.Aqua;
             this.label1.Location = new System.Drawing.Point(57, 161);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(102, 22);
+            this.label1.Size = new System.Drawing.Size(178, 22);
             this.label1.TabIndex = 24;
-            this.label1.Text = "All Events";
+            this.label1.Text = "All Events Profiles";
             this.label1.TextAlign = System.Drawing.ContentAlignment.BottomCenter;
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // panel1
             // 

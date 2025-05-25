@@ -64,7 +64,5 @@ namespace Event_Management_System
             manageProfile.Show();
 
         }
-
-
     }
 }
